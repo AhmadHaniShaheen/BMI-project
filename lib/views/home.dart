@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: const Color(0xff1D2136).withOpacity(0.7),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
@@ -28,54 +28,50 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          const RowInfo(
-            firstChild: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.male,
-                  size: 80,
-                ),
-                Text(
-                  "MALE",
-                  style: TextStyle(fontSize: 32),
-                ),
-              ],
-            ),
-            secandChild: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.female,
-                  size: 80,
-                ),
-                Text(
-                  "FEMALE",
-                  style: TextStyle(fontSize: 32),
-                ),
-              ],
+          const Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: MyCard(
+                      icon: Icons.male,
+                      title: 'MALE',
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Expanded(
+                    child: MyCard(
+                      icon: Icons.female,
+                      title: 'FEMALE',
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
-                        color: Colors.grey,
+                        color: const Color(0xff24263B).withOpacity(0.9),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
                             'HEIGHT',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
+                              fontWeight: FontWeight.w100,
                             ),
                           ),
                           const SizedBox(
@@ -83,27 +79,31 @@ class _HomePageState extends State<HomePage> {
                           ),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                '63',
+                                '181',
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 48,
                                   color: Colors.white,
+                                  fontWeight: FontWeight.w100,
                                 ),
                               ),
                               Text(
                                 'cm',
                                 style: TextStyle(
                                   color: Colors.white,
+                                  fontWeight: FontWeight.w100,
                                 ),
                               ),
                             ],
                           ),
                           Slider(
-                            value: 0,
-                            onChanged: (value) {},
                             thumbColor: Colors.red,
+                            activeColor: Colors.red,
                             inactiveColor: Colors.white,
+                            value: 0.3,
+                            onChanged: (value) {},
                           )
                         ],
                       ),
@@ -121,6 +121,9 @@ class _HomePageState extends State<HomePage> {
                   'WEIGHT',
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
                 const Text(
                   '63',
                   style: TextStyle(
@@ -128,11 +131,14 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     FAButton(function: () {}, icon: Icons.remove),
-                    FAButton(function: () {}, icon: Icons.remove),
+                    FAButton(function: () {}, icon: Icons.add),
                   ],
                 )
               ],
@@ -144,6 +150,9 @@ class _HomePageState extends State<HomePage> {
                   'AGE',
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
                 const Text(
                   '63',
                   style: TextStyle(
@@ -151,32 +160,14 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.remove),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add),
-                      ),
-                    )
+                    FAButton(function: () {}, icon: Icons.remove),
+                    FAButton(function: () {}, icon: Icons.add),
                   ],
                 )
               ],
@@ -184,7 +175,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             height: 56,
-            color: Colors.red,
+            color: const Color(0xffE83D66),
             child: const Center(
               child: Text(
                 'CULCOLATE',
@@ -194,6 +185,40 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  const MyCard({
+    super.key,
+    required this.icon,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(7),
+        color: const Color(0xff24263B).withOpacity(0.9),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 80,
+            color: Colors.white,
+          ),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
         ],
       ),
