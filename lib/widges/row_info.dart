@@ -14,14 +14,14 @@ class RowInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
         child: Row(
           children: [
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7),
-                  color: Colors.grey,
+                  color: const Color(0xff24263B).withOpacity(0.9),
                 ),
                 child: firstChild,
               ),
@@ -33,7 +33,7 @@ class RowInfo extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7),
-                  color: Colors.grey,
+                  color: const Color(0xff24263B).withOpacity(0.9),
                 ),
                 child: secandChild,
               ),
