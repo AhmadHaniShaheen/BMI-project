@@ -1,5 +1,6 @@
 import 'package:bmi_project/constants/colors.dart';
 import 'package:bmi_project/widges/card_data.dart';
+import 'package:bmi_project/widges/card_info.dart';
 import 'package:bmi_project/widges/fab_dart.dart';
 import 'package:bmi_project/widges/my_card.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Gender? selectedGender;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +39,14 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     child: MyCard(
-                      color: contanirColor.withOpacity(0.9),
+                      onTap: () {
+                        setState(() {
+                          selectedGender = Gender.male;
+                        });
+                      },
+                      color: selectedGender == Gender.male
+                          ? const Color(0xffE83D66)
+                          : contanirColor.withOpacity(0.9),
                       child: const CardData(
                         icon: Icons.male,
                         title: 'MALE',
@@ -46,7 +55,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Expanded(
                     child: MyCard(
-                      color: contanirColor.withOpacity(0.9),
+                      onTap: () {
+                        setState(() {
+                          selectedGender = Gender.female;
+                        });
+                      },
+                      color: selectedGender == Gender.female
+                          ? const Color(0xffE83D66)
+                          : contanirColor.withOpacity(0.9),
                       child: const CardData(
                         icon: Icons.female,
                         title: 'FEMALE',
@@ -162,52 +178,4 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class CardInfo extends StatelessWidget {
-  final String title;
-  final int weightNumber;
-  final IconData iconRemove;
-  final IconData iconAdd;
-  const CardInfo({
-    super.key,
-    required this.title,
-    required this.weightNumber,
-    required this.iconRemove,
-    required this.iconAdd,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(
-          weightNumber.toString(),
-          style: const TextStyle(
-            fontSize: 24,
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            FAButton(function: () {}, icon: iconRemove),
-            FAButton(function: () {}, icon: iconAdd),
-          ],
-        )
-      ],
-    );
-  }
-}
+enum Gender { male, female }
