@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 
 class CardInfo extends StatelessWidget {
   final String title;
-  final int weightNumber;
+  final double weightNumber;
   final IconData iconRemove;
   final IconData iconAdd;
+  final Function() functionRemove;
+  final Function() functionAdd;
   const CardInfo({
     super.key,
     required this.title,
     required this.weightNumber,
     required this.iconRemove,
     required this.iconAdd,
+    required this.functionRemove,
+    required this.functionAdd,
   });
 
   @override
@@ -42,8 +46,8 @@ class CardInfo extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            FAButton(function: () {}, icon: iconRemove),
-            FAButton(function: () {}, icon: iconAdd),
+            FAButton(function: functionRemove, icon: iconRemove),
+            FAButton(function: functionAdd, icon: iconAdd),
           ],
         )
       ],
