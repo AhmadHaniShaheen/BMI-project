@@ -220,12 +220,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                content: bmiBrain.checkBMI() == 'Normal rang'
+                content: bmiBrain.checkBMI() == 'Normal range'
                     ? Text(
-                        'You have a normal body weight\n Your score is ${bmiBrain.calculatBMI().round()}\n Good job!')
+                        'Your score is ${bmiBrain.calculatBMI().round()}, this is a healthy range\n\nGood job!',
+                        style: const TextStyle(
+                          fontSize: 24,
+                        ),
+                        textAlign: TextAlign.center,
+                      )
                     : bmiBrain.checkBMI() == 'Overweight'
                         ? Text(
-                            'Your score is ${bmiBrain.calculatBMI().round()} is above the healthy range\n \nMake lifestyle',
+                            'Your score is ${bmiBrain.calculatBMI().round()} is above the healthy range\n\nMake lifestyle',
                             style: const TextStyle(
                               fontSize: 24,
                             ),
@@ -241,7 +246,6 @@ class _HomePageState extends State<HomePage> {
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
-                      // When 'OK' is pressed, close the AlertDialog
                       Navigator.of(context).pop();
                     },
                     child: const Text(

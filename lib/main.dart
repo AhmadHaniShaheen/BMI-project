@@ -23,3 +23,11 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+
+/*
+1- flutter build apk 
+2- waiting downloud .... you can skip this.
+ */
